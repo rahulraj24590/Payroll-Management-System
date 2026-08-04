@@ -18,10 +18,10 @@ const AdminDashboard = () => {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
 
                 // Fetch users
-                const usersRes = await axios.get('http://localhost:5000/api/users', config);
+                const usersRes = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users`, config);
 
                 // Fetch payrolls
-                const payrollsRes = await axios.get('http://localhost:5000/api/payrolls', config);
+                const payrollsRes = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payrolls`, config);
 
                 const totalEmp = usersRes.data.count;
                 const totalPaid = payrollsRes.data.data.reduce((acc, curr) => acc + curr.netPay, 0);

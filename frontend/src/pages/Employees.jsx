@@ -19,7 +19,7 @@ const Employees = () => {
     const fetchEmployees = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/users', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setEmployees(res.data.data);
@@ -48,11 +48,11 @@ const Employees = () => {
         try {
             const token = localStorage.getItem('token');
             if (modalMode === 'Add') {
-                await axios.post('http://localhost:5000/api/auth/register', formData);
+                await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, formData);
             } else {
                 const updateData = { ...formData };
                 if (!updateData.password) delete updateData.password;
-                await axios.put(`http://localhost:5000/api/users/${currentEmpId}`, updateData, {
+                await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/${currentEmpId}`, updateData, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
             }
@@ -71,7 +71,7 @@ const Employees = () => {
         if (window.confirm(`Are you sure you want to delete ${emp.name}?`)) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:5000/api/users/${emp._id}`, {
+                await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/${emp._id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchEmployees();

@@ -25,7 +25,7 @@ const PayrollData = () => {
     const fetchPayrolls = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/payrolls', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payrolls`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPayrolls(res.data.data);
@@ -39,7 +39,7 @@ const PayrollData = () => {
     const fetchEmployees = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/users', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setEmployees(res.data.data);
@@ -51,7 +51,7 @@ const PayrollData = () => {
     const handleProcessPayroll = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/payrolls/${id}`, { status: 'Paid' }, {
+            await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payrolls/${id}`, { status: 'Paid' }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchPayrolls();
@@ -64,7 +64,7 @@ const PayrollData = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/payrolls', formData, {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payrolls`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShowModal(false);
@@ -185,8 +185,8 @@ const PayrollData = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-right font-bold text-slate-900">₹{record.netPay.toLocaleString()}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-center">
                                         <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${record.status === 'Paid' ? 'bg-emerald-100 text-emerald-800'
-                                                : record.status === 'Processing' ? 'bg-blue-100 text-blue-800'
-                                                    : 'bg-amber-100 text-amber-800'
+                                            : record.status === 'Processing' ? 'bg-blue-100 text-blue-800'
+                                                : 'bg-amber-100 text-amber-800'
                                             }`}>
                                             {record.status}
                                         </span>

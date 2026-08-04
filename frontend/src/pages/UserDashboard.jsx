@@ -13,7 +13,7 @@ const UserDashboard = () => {
                 const token = localStorage.getItem('token');
                 const config = { headers: { Authorization: `Bearer ${token}` } };
 
-                const res = await axios.get('http://localhost:5000/api/payrolls', config);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payrolls`, config);
                 const userPayrolls = res.data.data;
 
                 if (userPayrolls.length > 0) {
