@@ -3,6 +3,7 @@ services:
   - type: web
     name: payroll-backend
     repo: https://github.com/rahulraj24590/Payroll-Management-System
+    plan: free
     env: node
     region: ohio
     rootDir: backend
