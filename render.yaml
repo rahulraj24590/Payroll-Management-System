@@ -19,13 +19,9 @@ services:
     name: payroll-frontend
     repo: https://github.com/rahulraj24590/Payroll-Management-System
     env: static
-    region: ohio
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: payroll-backend
-          property: url
+        sync: false
