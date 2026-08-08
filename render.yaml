@@ -1,0 +1,29 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: payroll-backend
+    env: node
+    region: ohio
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Frontend Static Site
+  - type: web
+    name: payroll-frontend
+    env: static
+    region: ohio
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: payroll-backend
+          property: url
