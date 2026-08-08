@@ -2,6 +2,7 @@ services:
   # Backend Web Service
   - type: web
     name: payroll-backend
+    repo: https://github.com/rahulraj24590/Payroll-Management-System
     env: node
     region: ohio
     rootDir: backend
@@ -16,6 +17,7 @@ services:
   # Frontend Static Site
   - type: web
     name: payroll-frontend
+    repo: https://github.com/rahulraj24590/Payroll-Management-System
     env: static
     region: ohio
     rootDir: frontend
